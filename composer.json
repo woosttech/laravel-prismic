@@ -1,0 +1,30 @@
+{
+    "name": "woost/laravel-prismic",
+    "description": "Prismic provider for Laravel",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Rutger Bresjer",
+            "email": "rutger@woost.tech"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^6.0",
+        "prismic/php-sdk": "^5.1"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Woost\\LaravelPrismic\\ServiceProvider"
+            ],
+            "aliases": {
+                "LaravelPrismic": "Woost\\LaravelPrismic\\Facade"
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Woost\\LaravelPrismic\\": "src/"
+        }
+    }
+}
