@@ -25,6 +25,9 @@ class Controller extends LaravelController
             ]);
         }
 
+        // Temp fix
+        abort(404);
+
         // Find page by where clauses
         $results = $customType::where($params);
         if ($results->isEmpty()) {
