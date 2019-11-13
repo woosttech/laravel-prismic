@@ -47,6 +47,14 @@ class Service
         return new PrismicLinkResolver;
     }
 
+    public function getPrismicLangForLocale($locale)
+    {
+        $mapping = config('laravel-prismic.language_mappings');
+
+        if (!isset($mapping[$locale])) return null;
+        return $mapping[$locale];
+    }
+
     public static function classForTypeName(string $typeName)
     {
         foreach (config('laravel-prismic.types') as $type) {
