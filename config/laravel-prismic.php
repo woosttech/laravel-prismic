@@ -10,5 +10,7 @@ return [
     'cache_prefix' => 'laravel-prismic',
     'route_prefix' => 'laravel-prismic',
 
+    'language_mappings' => [],
+
     'all_pages_limit' => env('PRISMIC_MAX_RESULTS', 100),
 ];

@@ -2,8 +2,9 @@
 
 namespace Woost\LaravelPrismic;
 
-use Illuminate\Support\Str;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 use Prismic\Predicates;
@@ -76,9 +77,15 @@ abstract class CustomType implements Arrayable
     {
         if (!Facade::isEnabled()) return null;
 
+        $options = [];
+        $locale = App::getLocale();
+        if ($lang = Facade::getPrismicLangForLocale($locale)) {
+            $options['lang'] = $lang;
+        }
+
         try {
             $document = Facade::getApi()
-                ->getSingle(static::getTypeName());
+                ->getSingle(static::getTypeName(), $options);
         } catch (\Exception $exception) {
             report($exception);
             return null;
@@ -93,9 +100,15 @@ abstract class CustomType implements Arrayable
     {
         if (!Facade::isEnabled()) return null;
 
+        $options = [];
+        $locale = App::getLocale();
+        if ($lang = Facade::getPrismicLangForLocale($locale)) {
+            $options['lang'] = $lang;
+        }
+
         try {
             $document = Facade::getApi()
-                ->getByUID(static::getTypeName(), $uid);
+                ->getByUID(static::getTypeName(), $uid, $options);
         } catch (\Exception $exception) {
             report($exception);
             return null;
@@ -121,6 +134,11 @@ abstract class CustomType implements Arrayable
         $options['orderings'] = $orderings ?? static::getDefaultOrderings();
         $options['pageSize'] = $limit ?? static::getDefaultLimit();
         $options['page'] = $page ?? 1;
+
+        $locale = App::getLocale();
+        if ($lang = Facade::getPrismicLangForLocale($locale)) {
+            $options['lang'] = $lang;
+        }
 
         if (is_array($fields)) {
             $fields = array_map(function ($field) {
