@@ -41,7 +41,7 @@ abstract class CustomType implements Arrayable
 
     public function __get(string $key)
     {
-        if ($this->data->{$key}) {
+        if (isset($this->data->{$key})) {
             return $this->data->{$key};
         }
 
