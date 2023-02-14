@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "laravel/framework": "^6.0",
+        "laravel/framework": "^6.0||ˆ7.0||ˆ8.0||ˆ9.0||ˆ10.0",
         "prismic/php-sdk": "^5.1"
     },
     "extra": {
